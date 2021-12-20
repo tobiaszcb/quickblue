@@ -5,7 +5,7 @@ def list_devices():
     result = sp.check_output(['bluetoothctl', 'devices']).decode("utf-8")
 
     # [['9C:64:8B:73:5D:39', 'Tobiasz’s AirPods'], ['D0:D0:03:1F:3A:95', '[TV] Samsung 7 Series (50)']]
-    devices_attributes = [d.replace('Device ', '').split(' ', 1) for d in result.splitlines()]
+    devices_attributes = [ d.replace('Device ', '').split(' ', 1) for d in result.splitlines() ]
 
     return [ Device(d[1], d[0]) for d in devices_attributes if "AirPods" in d[1] ]
 

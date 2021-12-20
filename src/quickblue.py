@@ -11,7 +11,8 @@ AIRPODS: List[Device] = list_devices()
 
 def main():
     indicator = Indicator()
-    indicator.create_menu_items(AIRPODS)
+    indicator.add_devices(AIRPODS)
+    indicator.create_standard_menu()
     indicator.start()
 
 
