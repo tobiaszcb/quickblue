@@ -54,6 +54,12 @@ class Indicator:
 
         self.menu.show_all()
 
+    def disconnect(self, source: Gtk.MenuItem, *data):
+        current_device = next(device for device in list_devices() if device.connected)
+        if current_device:
+            current_device.disconnect()
+        Gtk.main_quit()
+
     def remove_existing_items(self):
         children: List[Gtk.MenuItem] = self.menu.get_children()
         if children:
@@ -77,5 +83,5 @@ class Indicator:
 
     def _create_quit_item(self):
         quit_item = Gtk.MenuItem("Quit")
-        quit_item.connect("activate", Gtk.main_quit)
+        quit_item.connect("activate", self.disconnect)
         self.menu.append(quit_item)
