@@ -7,7 +7,7 @@ from gi.repository import AppIndicator3
 
 from typing import List
 
-from device import Device, list_devices
+from device import Device, list_devices, get_current_device
 from notifications import Notifier
 from globals import *
 
@@ -54,8 +54,8 @@ class Indicator:
 
         self.menu.show_all()
 
-    def disconnect(self, source: Gtk.MenuItem, *data):
-        current_device = next(device for device in list_devices() if device.connected)
+    def disconnect(self, source: Gtk.MenuItem):
+        current_device = get_current_device()
         if current_device:
             current_device.disconnect()
         Gtk.main_quit()
