@@ -9,7 +9,6 @@ def list_devices():
 
     return [ Device(d[1], d[0]) for d in devices_attributes if "AirPods" in d[1] ]
 
-
 class Device:
     def __init__(self, name, mac) -> None:
         self.name = name
@@ -27,3 +26,8 @@ class Device:
         connected_attribute_index = info_result_list.index("Connected:")
         connected_value_index = connected_attribute_index + 1
         return info_result_list[connected_value_index] == 'yes'
+
+def get_current_device() -> Device:
+    for device in list_devices():
+        if device.connected:
+            return device
